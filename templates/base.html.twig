@@ -14,6 +14,28 @@
         {% endblock %}
     </head>
     <body>
-        {% block body %}{% endblock %}
+        {% block nav %}{% endblock %}
+        <h1>Bienvenue à la bibliothèque</h1>
+        {% block body %}
+            <p>Ceci est le contenu de la balise <code>block body</code> du fichier 
+                <mark>base.html.twig</mark>
+            </p>
+            <p>Le nombre est {{ nombre }}</p>
+            <p>Bonjour M. {{ nom }}</p>
+        {% endblock %}
+
+        <footer>
+            <p>Ceci est le footer de la page</p>
+        </footer>
     </body>
 </html>
+
+{# COMMENTAIRES #}
+{# 
+    - On ne met jamais de balise PHP dans un fichier Twig 
+    - L'équivalent de la balise PHP echo <?= ?> en Twig est : {{ }}
+    - Les balises twig ressemblent aux balises HTML
+        ouverture : {% 𝙗𝙖𝙡𝙞𝙨𝙚 %}
+        fermeture : {% end𝙗𝙖𝙡𝙞𝙨𝙚 %}
+
+#}
