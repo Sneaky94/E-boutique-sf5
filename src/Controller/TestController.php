@@ -77,6 +77,7 @@ class TestController extends AbstractController
      * par n'importe quelle chaîne de caractères.
      * Pour pouvoir utiliser ces valeurs passées dans l'URL, il faut déclarer des arguments dans
      * la fonction 𝘤𝘢𝘭𝘤𝘶𝘭𝘋𝘺𝘯𝘢𝘮𝘪𝘲𝘶𝘦 qui auront le même nom
+     * Si le paramètre de la route n'est pas obligatoire, on ajoute un ? après le nom du paramètre
      */
     public function calculDynamique($a, $b)
     {
@@ -85,6 +86,46 @@ class TestController extends AbstractController
             "nb1" => $a,
             "nb2" => $b
         ]);
+    }
+
+    /**
+     * @Route("/test/tableau", name="app_test_tableau")
+     * 
+     */
+    public function tableau()
+    {
+        $array = [ 5, 10, "bonjour", "je m'appelle", true, 789, false, 12.5 ];
+        return $this->render("test/tableau.html.twig", [ "tableau" => $array ]);
+    }
+
+    /**
+     * @Route("/test/tableau-associatif")
+     */
+    public function tableauAssociatif()
+    {
+        $p = [ "nom" => "Cérien", "prenom" => "Jean" ];
+        return $this->render("test/assoc.html.twig", ["var" => $p]);
+
+        /* EXO : affichez les valeurs du tableau $p  */
+    }
+
+    /**
+     * @Route("/test/objet")
+     */
+    public function objet()
+    {
+        $objet = new \stdClass;
+        $objet->nom = "Odin";
+        $objet->prenom = "Anne";
+        return $this->render("test/assoc.html.twig", [ "var" => $objet ]);
+    }
+
+    /**
+     * @Route("/test/condition/{age}")
+     */
+    public function condition($age)
+    {
+        return $this->render("test/condition.html.twig", ["age" => $age]);
     }
 
 }

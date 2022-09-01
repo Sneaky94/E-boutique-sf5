@@ -1,0 +1,60 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des clients{% endblock %}
+
+{% block h1 %}Liste des clients{% endblock %} 
+
+{% block body %}
+
+    <table class="table table-bordered">
+        <thead class="thead-dark">
+            <tr>
+                <th>Id</th>
+                <th>Pseudo</th>
+                <th>Rôles</th>
+                <th>Email</th>
+                <th>Nom</th>
+                <th>Prenom</th>
+                <th>Civilité</th>
+                <th>Adresse</th>
+                <th>Code postal</th>
+                <th>Ville</th>
+                <th>Nb commandes</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for client in clients %}
+            <tr>
+                <td>{{ client.id }}</td>
+                <td>{{ client.pseudo }}</td>
+                <td>{{ client.roles ? client.roles|json_encode : '' }}</td>
+                <td>{{ client.email }}</td>
+                <td>{{ client.nom }}</td>
+                <td>{{ client.prenom }}</td>
+                <td>{{ client.civilite }}</td>
+                <td>{{ client.adresse }}</td>
+                <td>{{ client.codePostal }}</td>
+                <td>{{ client.ville }}</td>
+                <td>{{ client.commandes|length }}</td>
+                <td>
+                    <a href="{{ path('app_admin_client_show', {'id': client.id}) }}">
+                        <i class="fa fa-eye"></i>
+                    </a>
+                    <a href="{{ path('app_admin_client_edit', {'id': client.id}) }}">
+                        <i class="fa fa-edit"></i>
+                    </a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="12">Aucun client enregistré</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_admin_client_new') }}" class="btn btn-primary">
+        <i class="fa fa-plus"></i> Ajouter un client
+    </a>
+{% endblock %}

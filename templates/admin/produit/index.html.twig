@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des Produits{% endblock %}
+
+{% block body %}
+    <h1>Liste des Produits</h1>
+
+    <table class="table table-bordered">
+        <thead class="thead-dark">
+            <tr>
+                <th>Id</th>
+                <th>Référence</th>
+                <th>Catégorie</th>
+                <th>Titre</th>
+                <th>Description</th>
+                <th>Photo</th>
+                <th>Prix</th>
+                <th>Stock</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for produit in produits %}
+            <tr>
+                <td>{{ produit.id }}</td>
+                <td>{{ produit.reference }}</td>
+                <td>{{ produit.categorie }}</td>
+                <td>{{ produit.titre }}</td>
+                <td>{{ produit.description }}</td>
+                <td>
+                    <img src="{{ image_path ~ produit.photo }}" alt="image manquante" class="miniature">
+                </td>
+                <td>{{ produit.prix }}</td>
+                <td>{{ produit.stock }}</td>
+                <td>
+                    <a href="{{ path('app_admin_produit_show', {'id': produit.id}) }}">show</a>
+                    <a href="{{ path('app_admin_produit_edit', {'id': produit.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="9">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_admin_produit_new') }}">Create new</a>
+{% endblock %}

@@ -1,0 +1,30 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+    <p>Valeurs du tableau associatif</p>
+    {# <table border="1">
+        <tr>
+            <th>Nom</th>
+            <td>{{ var["nom"] }}</td>
+        </tr>
+
+        <tr>
+            <th>Prénom</th>
+            <td>{{ var["prenom"] }}</td>
+        </tr>
+    </table> #}
+
+    <p>En utilisant la syntaxe des objets</p>
+    <table border="1">
+        <tr>
+            <th>Nom</th>
+            <td>{{ var.nom }}</td>
+        </tr>
+
+        <tr>
+            <th>Prénom</th>
+            <td>{{ var.prenom }}</td>
+        </tr>
+    </table>
+
+{% endblock %}

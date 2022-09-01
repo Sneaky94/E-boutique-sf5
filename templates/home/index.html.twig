@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Page d'accueil{% endblock %}
+
+{% block body %}
+    <div class="card-columns">
+        {% for produit in listeProduits %}
+            <div class="card" style="style="margin-right: 0;margin-left: 0;"">
+                <img class="card-img-top mx-auto w-100" src="{{ asset("images/" ~ produit.photo ) }}" alt="{{ produit.titre }}">
+                <div class="card-body">
+                    <h5 class="card-title">Nom : {{ produit.titre }}</h5>
+                    <p class="card-text">Référence : {{ produit.reference }}</p>
+                    <p class="card-text">Catégorie : {{ produit.categorie }}</p>
+                    <p class="card-text">Prix : {{ produit.prix }} €</p>
+                    <p class="card-text">Stock : {{ produit.stock }}</p>
+                    <a href="" class="btn btn-primary">Voir</a>
+                    <form method="get" action="">
+                        <input name="qte" type="number">
+                        <button class="btn btn-info">
+                            <i class="fa fa-cart-arrow-down"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        {% else %}
+            Aucun produit enregistré
+        {% endfor %}
+    </div>
+
+{% endblock %}
