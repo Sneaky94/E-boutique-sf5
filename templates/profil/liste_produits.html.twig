@@ -1,0 +1,13 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+    <ul class="list-group">
+        {% for produit in produits %}
+            <li class="list-group-item">
+                {{ produit.titre }} - {{ produit.prix }}€
+            </li> 
+        {% endfor %}
+    </ul>
+{% endblock %}
+
+{% block h1 %}Liste des produits{% endblock %}
