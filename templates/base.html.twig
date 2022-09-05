@@ -29,6 +29,8 @@
                 {{ include("nav.html.twig") }}
             {% endblock %}
 
+            {{ include("messages.html.twig") }}
+
             <h1>{% block h1 %}Bienvenue à la bibliothèque{% endblock %}</h1>
 
             {% block body %}
@@ -41,7 +43,7 @@
 
             <footer>
                 {% block footer %}
-                    <p>Ceci est le footer de la page</p>
+                    <p> Ceci est le footer de la page</p>
                 {% endblock %}
             </footer>
         </div>

@@ -2,8 +2,10 @@
 
 {% block title %}Commande{% endblock %}
 
+{% block h1 %}Détail de la commande{% endblock %}
+
 {% block body %}
-    <h1>Commande</h1>
+
 
     <table class="table">
         <tbody>
@@ -13,15 +15,41 @@
             </tr>
             <tr>
                 <th>Montant</th>
-                <td>{{ commande.montant }}</td>
+                <td>{{ commande.montant }} €</td>
             </tr>
             <tr>
-                <th>Date_enregistrement</th>
-                <td>{{ commande.dateEnregistrement ? commande.dateEnregistrement|date('Y-m-d H:i:s') : '' }}</td>
+                <th>Date</th>
+                <td>{{ commande.dateEnregistrement ? 'Le ' ~ commande.dateEnregistrement|date('d/m/Y à H:i:s') : '' }}</td>
             </tr>
             <tr>
                 <th>Etat</th>
                 <td>{{ commande.etat }}</td>
+            </tr>
+
+            <tr>
+                <th>Détail de la commande</th>
+                <td>
+                <table class="table table-bordered">
+            <thead class="thead-dark">
+        <tr>
+            <th>Identifiant</th>
+            <th>Désignation</th>
+            <th>Qté</th>
+            <th>Sous-total</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for detail in commande.details %}
+            <tr>
+                <td> {{ detail.produit.id }} </td>
+                <td> <a href="{{ path('app_admin_produit_show', {id: detail.produit.id}) }}"> {{ detail.produit.titre }} </a> </td>
+                <td> {{ detail.quantite }} </td>
+                <td> {{ detail.quantite * detail.prix }} </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+            </table>
+                </td>
             </tr>
         </tbody>
     </table>

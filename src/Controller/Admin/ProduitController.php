@@ -73,8 +73,14 @@ class ProduitController extends AbstractController
      */
     public function show(Produit $produit): Response
     {
+        $details = $produit->getDetails();
+        $nb = 0;
+        foreach($details as $d){
+            $nb += $d->getQuantite();
+        }
         return $this->render('admin/produit/show.html.twig', [
             'produit' => $produit,
+            "nb" => $nb
         ]);
     }
 

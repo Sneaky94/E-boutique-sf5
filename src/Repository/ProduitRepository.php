@@ -39,28 +39,30 @@ class ProduitRepository extends ServiceEntityRepository
         }
     }
 
-//    /**
-//     * @return Produit[] Returns an array of Produit objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('p')
-//            ->andWhere('p.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('p.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
+    /**
+     * @return Produit[] Returns an array of Produit objects
+        SELECT p.*
+        FROM produit p
+        WHERE p.titre LIKE '%les%'
+     */
 
-//    public function findOneBySomeField($value): ?Produit
-//    {
-//        return $this->createQueryBuilder('p')
-//            ->andWhere('p.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
+    public function recherche($value): array
+    {
+        return $this->createQueryBuilder('p')
+            ->where('p.titre LIKE :val')
+            ->setParameter('val', "%$value%")
+            ->orderBy('p.titre', 'ASC')
+            ->getQuery()
+            ->getResult();
+    }
+
+    //    public function findOneBySomeField($value): ?Produit
+    //    {
+    //        return $this->createQueryBuilder('p')
+    //            ->andWhere('p.exampleField = :val')
+    //            ->setParameter('val', $value)
+    //            ->getQuery()
+    //            ->getOneOrNullResult()
+    //        ;
+    //    }
 }

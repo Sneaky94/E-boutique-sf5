@@ -16,7 +16,7 @@
                 <td>{{ produit.reference }}</td>
             </tr>
             <tr>
-                <th>Categorie</th>
+                <th>Catégorie</th>
                 <td>{{ produit.categorie }}</td>
             </tr>
             <tr>
@@ -24,12 +24,14 @@
                 <td>{{ produit.titre }}</td>
             </tr>
             <tr>
-                <th>Description</th>
+                <th>Déscription</th>
                 <td>{{ produit.description }}</td>
             </tr>
             <tr>
                 <th>Photo</th>
-                <td>{{ produit.photo }}</td>
+                <td>
+                 <img src="{{ image_path ~ produit.photo }}">
+                </td>
             </tr>
             <tr>
                 <th>Prix</th>
@@ -38,6 +40,18 @@
             <tr>
                 <th>Stock</th>
                 <td>{{ produit.stock }}</td>
+            </tr>
+
+            <tr>
+            <th>Popularité</th>
+                <td>
+                <p>Le produit a été commandé {{ produit.details|length }} fois !</p>
+                    {# {% set nb = 0 %}
+                    {% for d in produit.details %}
+                        {% set nb = nb + d.quantite %}
+                    {% endfor %} #}
+                    <p> Le nombre de produits commandés : {{ nb }} </p>
+                </td>
             </tr>
         </tbody>
     </table>

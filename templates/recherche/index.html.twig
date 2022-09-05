@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello RechercheController!{% endblock %}
+
+{% block h1 %}
+    Résultat de la recherche du mot : <code> {{ mot }} </code>
+{% endblock %}
+
+{% block body %}
+    <div class="card-column">
+        {% for produit in produits %}
+            {{ include("produit/card.html.twig") }}
+        {% endfor %}
+    </div>
+{% endblock %}
