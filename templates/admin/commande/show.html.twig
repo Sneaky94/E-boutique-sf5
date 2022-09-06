@@ -10,8 +10,18 @@
     <table class="table">
         <tbody>
             <tr>
-                <th>Id</th>
-                <td>{{ commande.id }}</td>
+            <th>Id</th>
+            <td>{{ commande.id }}</td>
+            </tr>
+            <tr>
+                <th>Client</th>
+                <td> 
+                    {% if commande.client.nom is not empty or commande.client.prenom is not empty %}
+                    {{ commande.client.nom }} {{ commande.client.prenom }}
+                    {% else %}
+                    {{ commande.client.pseudo }}
+                    {% endif %}
+                </td>
             </tr>
             <tr>
                 <th>Montant</th>
@@ -44,7 +54,7 @@
                 <td> {{ detail.produit.id }} </td>
                 <td> <a href="{{ path('app_admin_produit_show', {id: detail.produit.id}) }}"> {{ detail.produit.titre }} </a> </td>
                 <td> {{ detail.quantite }} </td>
-                <td> {{ detail.quantite * detail.prix }} </td>
+                <td> {{ detail.quantite * detail.prix }} €</td>
             </tr>
         {% endfor %}
         </tbody>
@@ -54,9 +64,9 @@
         </tbody>
     </table>
 
-    <a href="{{ path('app_admin_commande_index') }}">back to list</a>
+    <a href="{{ path('app_admin_commande_index') }}" class="btn btn-primary">back to list</a>
 
-    <a href="{{ path('app_admin_commande_edit', {'id': commande.id}) }}">edit</a>
+    <a href="{{ path('app_admin_commande_edit', {'id': commande.id}) }}" class="btn btn-primary">edit</a>
 
     {{ include('admin/commande/_delete_form.html.twig') }}
 {% endblock %}

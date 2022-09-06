@@ -9,6 +9,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface as Hasher;
+
 
 /**
  * @Route("/admin/client")
@@ -28,13 +30,16 @@ class ClientController extends AbstractController
     /**
      * @Route("/new", name="app_admin_client_new", methods={"GET", "POST"})
      */
-    public function new(Request $request, ClientRepository $clientRepository): Response
+    public function new(Request $request, ClientRepository $clientRepository, Hasher $hasher): Response
     {
         $client = new Client();
         $form = $this->createForm(ClientType::class, $client);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $mdp = $form->get("password")->getData();
+            $mdpEncode = $hasher->hashPassword($client, $mdp);
+            $client->setPassword($mdpEncode);
             $clientRepository->add($client, true);
 
             return $this->redirectToRoute('app_admin_client_index', [], Response::HTTP_SEE_OTHER);
@@ -47,7 +52,7 @@ class ClientController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="app_admin_client_show", methods={"GET"})
+     * @Route("/{pseudo}", name="app_admin_client_show", methods={"GET"})
      */
     public function show(Client $client): Response
     {
@@ -59,12 +64,18 @@ class ClientController extends AbstractController
     /**
      * @Route("/{id}/edit", name="app_admin_client_edit", methods={"GET", "POST"})
      */
-    public function edit(Request $request, Client $client, ClientRepository $clientRepository): Response
+    public function edit(Request $request, Client $client, ClientRepository $clientRepository, Hasher $hasher): Response
     {
         $form = $this->createForm(ClientType::class, $client);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            // $mdp = $request->request->get("password");
+            $mdp = $form->get("password")->getData();
+            if( $mdp ){
+            $mdpEncode = $hasher->hashPassword($client, $mdp);
+            $client->setPassword($mdpEncode);
+            }
             $clientRepository->add($client, true);
 
             return $this->redirectToRoute('app_admin_client_index', [], Response::HTTP_SEE_OTHER);
