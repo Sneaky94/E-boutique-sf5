@@ -9,10 +9,17 @@
         {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
         {% block stylesheets %}
             {{ encore_entry_link_tags('app') }}
+            {% if app.request.pathinfo starts with '/admin' %}
+            {{ encore_entry_link_tags('admin') }}
+            {% endif %}
+            
         {% endblock %}
 
         {% block javascripts %}
             {{ encore_entry_script_tags('app') }}
+            {% if app.request.pathinfo starts with '/admin' %}
+            {{ encore_entry_script_tags('admin') }}
+            {% endif %}
         {% endblock %}
     </head>
     <body>
@@ -35,7 +42,7 @@
 
             <footer>
                 {% block footer %}
-                    <p> Ceci est le footer de la page</p>
+                    <p> Ceci est le footer de la page a Rachid ;)</p>
                 {% endblock %}
             </footer>
         </div>

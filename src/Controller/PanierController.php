@@ -66,7 +66,16 @@ class PanierController extends AbstractController
 
         $session->set("panier", $panier);  // je remets $panier dans la session, à l'indice 'panier'
         //dd($produit); // dd : Dump and Die
-        return $this->redirectToRoute("app_home");
+        
+
+        //return $this->redirectToRoute("app_home");
+        $nb = 0;
+        foreach ($panier as $ligne){
+            $nb += $ligne["quantite"];
+        }
+
+
+        return $this->json($nb);
     }
 
     /** 

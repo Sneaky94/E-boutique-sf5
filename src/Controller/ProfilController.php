@@ -2,10 +2,11 @@
 
 namespace App\Controller;
 
+use App\Entity\Commande;
 use App\Repository\ProduitRepository;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 /**
  * @Route("/profil")
@@ -39,6 +40,20 @@ class ProfilController extends AbstractController
         return $this->render("profil/liste_produits.html.twig", [ 
             "produits" => $produitRepository->findAll() 
         ]);
+    }
+
+    /**
+     * @route("/detail-commande-{id}", name="app_profil_commande", requirements={"id"="\d+"})
+    */
+    public function detailCommande(Commande $commande): Response{
+        if( $commande->getClient() == $this->getUser()){
+                   return $this->render("profil/detail_commande.html.twig", [
+            "commande" => $commande
+        ]); 
+        }
+        throw $this->createAccessDeniedException("Vous n'avez pas accès à cet URL");
+        // $this->addFlash("danger", "ERREUR 403 : Vous n'avez pas acces a cet URL");
+        // return $this->redirectToRoute("app_home");
     }
 
 }

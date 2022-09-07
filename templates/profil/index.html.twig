@@ -44,6 +44,7 @@
             <table class="table">
                 <thead>
                     <tr>
+                        <th>Numéro</th>
                         <th>Date</th>
                         <th>Montant</th>
                         <th>État</th>
@@ -52,6 +53,7 @@
                 <tbody>
                     {% for cmd in app.user.commandes %}
                         <tr>
+                            <td> <a href="{{ path('app_profil_commande', {id: cmd.id}) }}" class="btn btn-primary" title="Voir le détail de la commande"> {{ cmd.id }} </a></td>
                             <td>{{ cmd.dateEnregistrement|date("d/m/y") }}</td>
                             <td>{{ cmd.montant }} €</td>
                             <td>{{ cmd.etat|upper }}</td>

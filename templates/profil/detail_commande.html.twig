@@ -1,0 +1,61 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Profil | Détail de la commande{% endblock %}
+
+{% block h1 %}Détail de ma commande n° {{ commande.id }} {% endblock %}
+
+{% block body %}
+
+
+    <table class="table">
+        <tbody>
+            <tr>
+            <th>Numero de commande</th>
+            <td>{{ commande.id }}</td>
+            </tr>
+
+            <tr>
+                <th>Date</th>
+                <td>{{ commande.dateEnregistrement ? 'Le ' ~ commande.dateEnregistrement|date('d/m/Y à H:i:s') : '' }}</td>
+            </tr>
+
+            <tr>
+                <th>Etat</th>
+                <td>{{ commande.etat }}</td>
+            </tr>
+
+            <tr>
+                <th>Détail de la commande</th>
+                <td>
+                <table class="table table-bordered">
+            <thead class="thead-dark">
+        <tr>
+            <th>Identifiant</th>
+            <th>Désignation</th>
+            <th>Qté</th>
+            <th>Sous-total</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for detail in commande.details %}
+            <tr>
+                <td> {{ detail.produit.id }} </td>
+                <td> {{ detail.produit.titre }} </td>
+                <td> {{ detail.quantite }} </td>
+                <td> {{ detail.quantite * detail.prix }} €</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+        <tfoot>
+            <tr class="thead-dark">
+            <th colspan="3">MONTANT</th>
+            <td><strong>{{commande.montant}} €</strong></td>
+            </tr>
+        </tfoot>
+            </table>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+{% endblock %}

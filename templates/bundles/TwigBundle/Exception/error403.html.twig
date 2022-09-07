@@ -1,0 +1,20 @@
+{% extends "base.html.twig" %}
+
+{% block title %}
+	Erreur 403
+{% endblock %}
+
+{% block h1 %}
+	403 : Accès interdit
+{% endblock %}
+
+{% block body %}
+<div class="alert alert-danger">
+    Vous n'avez pas accès à cet page
+	<i>GoOo BACK TO THE HELL !</i> 
+</div>
+
+<a href="{{ path('app_home') }}" class="btn btn-secondary">
+<i class="fa fa-home"></i>Retour a l'acceuil
+</a>
+{% endblock %}

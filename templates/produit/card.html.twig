@@ -1,16 +1,41 @@
-<div class="card" style="style="margin-right: 0;margin-left: 0;"">
-                <img class="card-img-top mx-auto w-100" src="{{ asset("images/" ~ produit.photo ) }}" alt="{{ produit.titre }}">
-                <div class="card-body">
-                    <h5 class="card-title">Nom : {{ produit.titre }}</h5>
-                    <p class="card-text">Référence : {{ produit.reference }}</p>
-                    <p class="card-text">Catégorie : {{ produit.categorie }}</p>
-                    <p class="card-text">Prix : {{ produit.prix }} €</p>
-                    <p class="card-text">Stock : {{ produit.stock }}</p>
-                    <a href="" class="btn btn-primary">Voir</a>
-                    <form method="get" action="{{ path('app_panier_ajouter', {id: produit.id}) }}">
-                        <input name="qte" type="number" value="1">
-                        <button class="btn btn-info">
-                            <i class="fa fa-cart-arrow-down"></i>
-                        </button>
-                    </form>
-                </div>
+<div class="col-4 my-2">
+    <div class="card" style="style="margin-right: 0;margin-left: 0;"">
+        <img class="card-img-top mx-auto w-100" src="{{ asset("images/" ~ produit.photo ) }}" alt="{{ produit.titre }}">
+        <div class="card-body">
+            <h5 class="card-title">Nom : {{ produit.titre }}</h5>
+            <p class="card-text">Référence : {{ produit.reference }}</p>
+            <p class="card-text">Catégorie : {{ produit.categorie }}</p>
+            <p class="card-text">Prix : {{ produit.prix }} €</p>
+            <p class="card-text">Stock : {{ produit.stock }}</p>
+            <a href="{{ path('app_produit_show', {id: produit.id}) }}" class="btn btn-primary">Voir</a>
+            <form method="get" action="{{ path('app_panier_ajouter', {id: produit.id}) }}" id="form{{ produit.id }}">
+                <input name="qte" type="number" value="1">
+                <button class="btn btn-warning">
+                    <i class="fa fa-cart-arrow-down"></i>
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+<script>
+window.addEventListener("load", () => {
+    $("#form{{ produit.id}}").on("submit",(evtSubmit) => {
+        evtSubmit.preventDefault();
+        $.ajax({
+            url: "{{ path('app_panier_ajouter', {id: produit.id}) }}",
+            data: "qte=" +  $("#form{{ produit.id}} [name='qte']").val(),
+            dataType: "json",
+            success: (data) => {
+                $("#nombre").html(data);
+                console.log("nb produits dans le panier = " + data);
+            },
+            error: (jqXHR,status, error) => {
+                console.log("ERREUR AJAX" , status,error);
+            }
+        });
+    });
+});
+</script>

@@ -1,0 +1,20 @@
+{% extends "base.html.twig" %}
+
+{% block title %}
+	Erreur 500
+{% endblock %}
+
+{% block h1 %}
+	500 : Erreur server
+{% endblock %}
+
+{% block body %}
+<div class="alert alert-danger">
+    Une erreur est survenue ! Ce n'est pas votre faute, tout va bien !
+	<i>Mais attention j'ai un oeil partout !!</i>
+</div>
+
+<a href="{{ path('app_home') }}" class="btn btn-secondary">
+<i class="fa fa-home"></i>Retour a l'acceuil
+</a>
+{% endblock %}
