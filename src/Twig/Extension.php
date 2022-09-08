@@ -29,6 +29,8 @@ class Extension extends AbstractExtension{
         return $autorisations;
     }
 
+
+    /* Exo : ajouter un filtre pour afficher la civilité correspondant à la lettre enregistrée en bdd */
     public function getFilters()
     {
         return[
