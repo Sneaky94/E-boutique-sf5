@@ -1,4 +1,15 @@
 $primary: #3b4f84;
+#nombre{
+    position: absolute;
+    bottom: 25px;
+    right: 9px;
+    font-size: smaller;
+}
+
+.fa-shopping-cart{
+    color: orange;
+}
+
 @import "~@fortawesome/fontawesome-free/css/all.min.css";
 @import "~bootstrap/scss/bootstrap";
 
