@@ -1,4 +1,23 @@
+// modification de la couleur primaire bootstap
 $primary: #3b4f84;
+
+
+// Debut du style des élements de la nav :
+
+#linkSignInIcon{
+    color: green;
+}
+
+#linkUserPlusIcon{
+    color: blue;
+}
+
+// le logo du panier (cadie)
+.fa-shopping-cart{
+    color: orange;
+}
+
+// le nombre d'article qui s'ajoute en haut du panier
 #nombre{
     position: absolute;
     bottom: 25px;
@@ -6,9 +25,56 @@ $primary: #3b4f84;
     font-size: smaller;
 }
 
-.fa-shopping-cart{
-    color: orange;
+#linkPseudoUser{
+    color: white;
 }
+
+#LinkSignOutIcon{
+    color: red;
+}
+
+#navbarDropdown{
+    color: white;
+}
+
+// La div en position absolute pour gere le numero qui s'ajouter en haut du panier
+.supportNombrePanier{
+    position: relative;
+}
+
+#btnRecherche{
+    color: white;
+}
+
+// Fin du style des élements de la nav !
+
+
+// Debut du style des bouton "voir" , "ajouter au panier" , inputQte
+
+#btnVoir{
+    display: flex;
+    justify-content: center;
+    margin-bottom:10px
+}
+
+#btnAjouterPanier{
+    display: flex; 
+    justify-content: center; 
+    align-items: baseline; 
+    width: 100%; 
+    height: 40px;
+}
+
+#inputQte{
+    width: 50px; 
+    position: absolute; 
+    left: 90px; 
+    bottom: 25px;
+}
+
+
+// Fin du style des bouton "voir" , "ajouter au panier" , inputQte
+
 
 @import "~@fortawesome/fontawesome-free/css/all.min.css";
 @import "~bootstrap/scss/bootstrap";

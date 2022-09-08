@@ -7,17 +7,17 @@
             <p class="card-text">Catégorie : {{ produit.categorie }}</p>
             <p class="card-text">Prix : {{ produit.prix }} €</p>
             <p class="card-text">Stock : {{ produit.stock }}</p>
-            <a href="{{ path('app_produit_show', {id: produit.id}) }}" class="btn btn-primary" style="display: flex;justify-content: center;margin-bottom:10px">Voir</a>
+            <a href="{{ path('app_produit_show', {id: produit.id}) }}" class="btn btn-primary" id="btnVoir">Voir</a>
             <hr>
             <form method="get" action="{{ path('app_panier_ajouter', {id: produit.id}) }}" id="form{{ produit.id }}">
 
-            <button class="btn btn-warning" style="display: flex; justify-content: center; align-items: baseline; width: 100%; height: 40px;">
+            <button class="btn btn-warning" id="btnAjouterPanier">
             <p>Ajouter au panier</p>
                 <i class="fa fa-cart-arrow-down"></i>
             </button>
     
             <p>Quantité:</p>
-            <input name="qte" type="number" value="1" style="width: 50px; position: absolute; left: 90px; bottom: 25px;">
+            <input name="qte" type="number" value="1" id="inputQte">
 
 
             </form>

@@ -10,23 +10,23 @@
 		<ul class="navbar-nav mr-auto">
 			{% if not app.user %}
 				<li class="nav-item active">
-					<a class="nav-link" style="color: green" href="{{ path('app_login') }}">
+					<a class="nav-link" id="linkSignInIcon" href="{{ path('app_login') }}">
 						<i class="fa fa-sign-in-alt"></i>
 					</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" style="color: blue" href="{{ path('app_register') }}">
+					<a class="nav-link" id="linkUserPlusIcon" href="{{ path('app_register') }}">
 						<i class="fa fa-user-plus"></i>
 					</a>
 				</li>
 			{% else %}
 				<li class="nav-item">
-					<a class="nav-link" style="color: white" href="{{ is_granted('ROLE_ADMIN') ? path('app_admin_statistique_show') : path('app_profil') }}">
+					<a class="nav-link" id="linkPseudoUser" href="{{ is_granted('ROLE_ADMIN') ? path('app_admin_statistique_show') : path('app_profil') }}">
 						{{ app.user.pseudo }}
 					</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" style="color: red" href="{{ path('app_logout') }}">
+					<a class="nav-link" id="LinkSignOutIcon" href="{{ path('app_logout') }}">
 						<i class="fa fa-sign-out-alt"></i>
 					</a>
 				</li>
@@ -35,11 +35,11 @@
 
 			{% if is_granted("ROLE_ADMIN") %}
 				<li class="nav-item dropdown">
-					<a class="nav-link dropdown-toggle" style="color: white" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+					<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 						Produits
 
 					</a>
-					<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+					<div class="dropdown-menu">
 						<a class="dropdown-item" href="{{ path('app_admin_produit_index') }}">
 							Liste
 						</a>
@@ -50,11 +50,11 @@
 				</li>
 
 				<li class="nav-item dropdown">
-					<a class="nav-link dropdown-toggle" style="color: white" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+					<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 						Clients
 
 					</a>
-					<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+					<div class="dropdown-menu">
 						<a class="dropdown-item" href="{{ path('app_admin_client_index') }}">
 							Liste
 						</a>
@@ -65,10 +65,10 @@
 				</li>
 
 				<li class="nav-item dropdown">
-					<a class="nav-link dropdown-toggle" style="color: white" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+					<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 						Commandes
 					</a>
-					<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+					<div class="dropdown-menu">
 						<a class="dropdown-item" href="{{ path('app_admin_commande_index') }}">
 							Liste
 						</a>
@@ -79,7 +79,7 @@
 				</li>
 			{% endif %}
 
-			<div class="supportNombrePanier" style="position: relative">
+			<div class="supportNombrePanier">
 			<li class="nav-item active">
 				<a class="nav-link" href="{{ path('app_panier') }}">
 					<i class="fa fa-shopping-cart"></i>
@@ -91,7 +91,7 @@
 
 		<form class="form-inline my-2 my-lg-0" action="{{ path('app_recherche_ajax') }}" id="formSearch">
 			<input name="search" id="search" class="form-control mr-sm-2" type="search" placeholder="Recherche" aria-label="Search">
-			<button class="btn btn-outline-success my-2 my-sm-0" style="color: white" type="submit">
+			<button class="btn btn-outline-success my-2 my-sm-0" id="btnRecherche" type="submit">
 				Recherche
 			</button>
 		</form>
