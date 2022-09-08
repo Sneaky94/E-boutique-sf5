@@ -1,7 +1,6 @@
 // modification de la couleur primaire bootstap
 $primary: #3b4f84;
 
-
 // Debut du style des élements de la nav :
 
 #linkSignInIcon{
@@ -71,10 +70,13 @@ $primary: #3b4f84;
     left: 90px; 
     bottom: 25px;
 }
-
-
 // Fin du style des bouton "voir" , "ajouter au panier" , inputQte
 
+// card qui contien les articles page ( card.html.twig )
+#cardRef{
+    margin-right: 0;
+    margin-left: 0;
+}
 
 @import "~@fortawesome/fontawesome-free/css/all.min.css";
 @import "~bootstrap/scss/bootstrap";
