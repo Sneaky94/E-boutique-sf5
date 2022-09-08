@@ -2,9 +2,11 @@
 
 namespace App\Twig;
 
-use App\Entity\Client;
-use Twig\Extension\AbstractExtension;
+use Twig\TwigTest;
 use Twig\TwigFilter;
+use App\Entity\Client;
+use Twig\TwigFunction;
+use Twig\Extension\AbstractExtension;
 
 class Extension extends AbstractExtension{
 
@@ -30,6 +32,10 @@ class Extension extends AbstractExtension{
     }
 
 
+    public function numerique($var){
+        return is_numeric($var);
+    }
+
     /* Exo : ajouter un filtre pour afficher la civilité correspondant à la lettre enregistrée en bdd */
     public function getFilters()
     {
@@ -38,4 +44,18 @@ class Extension extends AbstractExtension{
         ];
     }
 
+    public function getFunction()
+    {
+        return[
+            new TwigFunction("autorisation", [$this, "autorisation"])
+        ];
+        
+    }
+
+    public function getTests()
+    {
+        return[
+            new TwigTest("numerique", [$this, "numerique"])
+        ];
+    }
 }
