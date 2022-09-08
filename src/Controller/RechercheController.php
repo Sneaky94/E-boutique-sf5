@@ -24,4 +24,19 @@ class RechercheController extends AbstractController
             'mot'       => $mot
         ]);
     }
+
+    /**
+     * @Route("/recherche-ajax", name="app_recherche_ajax")
+     */
+    
+
+    public function ajax(Request $rq, ProduitRepository $pr): Response
+    {
+        $mot = $rq->query->get("search");
+        $produitsTrouves = $pr->recherche($mot);
+        return $this->render('recherche/ajax.html.twig', [
+            'produits'  => $produitsTrouves,
+            'mot'       => $mot
+        ]);
+    }
 }

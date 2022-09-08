@@ -30,7 +30,8 @@
 
             {{ include("messages.html.twig") }}
 
-            <h1>{% block h1 %}Bienvenue{% endblock %}</h1>
+            <div id="main">
+            <h1>{% block h1 %}Bienvenue {% endblock %}</h1>
 
             {% block body %}
                 <p>Ceci est le contenu de la balise <code>block body</code> du fichier 
@@ -39,7 +40,8 @@
                 <p>Le nombre est {{ nombre }}</p>
                 <p>Bonjour M. {{ nom }}</p>
             {% endblock %}
-
+            </div>
+            
             <footer>
                 {% block footer %}
                     <p> Ceci est le footer de la page a Rachid ;)</p>

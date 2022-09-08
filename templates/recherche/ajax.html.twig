@@ -1,0 +1,11 @@
+<h1>Résultat de la recherche du mot :
+	<code>
+		{{ mot }}
+	</code>
+</h1>
+
+<div class="card-deck">
+	{% for produit in produits %}
+		{{ include("produit/card.html.twig") }}
+	{% endfor %}
+</div>

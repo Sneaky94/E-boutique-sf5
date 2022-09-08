@@ -2,9 +2,10 @@
 
 namespace App\Repository;
 
+use App\Entity\Detail;
 use App\Entity\Produit;
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 
 /**
  * @extends ServiceEntityRepository<Produit>
@@ -56,6 +57,40 @@ class ProduitRepository extends ServiceEntityRepository
             ->getResult();
     }
 
+    /**
+        SELECT d.produit_id, count(*) as nb
+        FROM produit p
+        JOIN detail d ON p.id = d.produit_id
+        GROUP BY d.produit_id
+        ORDER BY 2 DESC
+        LIMIT 1
+     */
+    public function produitBestSeller()
+    {
+        return $this->createQueryBuilder("p")
+            ->join(Detail::class, "d", "WITH", "p.id = d.produit")
+            ->groupBy("p.id")
+            ->select("p as produit", "count(d) as nb")
+            ->orderBy("nb", "DESC")
+            ->setMaxResults(1)
+            ->getQuery()
+            ->getResult();
+    }
+
+
+    // SELECT * FROM produit WHERE stock < 10;
+
+    public function produitStock(){
+        return $this->createQueryBuilder("p")
+        ->where('p.stock < 10')
+        ->orderBy('p.titre')
+        ->getQuery()
+        ->getResult();
+    }
+
+
+
+
     //    public function findOneBySomeField($value): ?Produit
     //    {
     //        return $this->createQueryBuilder('p')
@@ -65,4 +100,5 @@ class ProduitRepository extends ServiceEntityRepository
     //            ->getOneOrNullResult()
     //        ;
     //    }
+
 }

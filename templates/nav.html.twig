@@ -1,98 +1,97 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <a class="navbar-brand" href="{{ path('app_home') }}">
-        E-boutik
-    </a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
+	<a class="navbar-brand" href="{{ path('app_home') }}">
+		E-boutik
+	</a>
+	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+		<span class="navbar-toggler-icon"></span>
+	</button>
 
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
-            {% if not app.user %}
-                <li class="nav-item active">
-                    <a class="nav-link" href="{{ path('app_login') }}">
-                        <i class="fa fa-sign-in-alt"></i> 
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ path('app_register') }}">
-                        <i class="fa fa-user-plus"></i>
-                    </a>
-                </li>
-            {% else %}
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ path('app_profil') }}">
-                        {{ app.user.pseudo }}
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ path('app_logout') }}">
-                        <i class="fa fa-sign-out-alt"></i>
-                    </a>
-                </li>
+	<div class="collapse navbar-collapse" id="navbarSupportedContent">
+		<ul class="navbar-nav mr-auto">
+			{% if not app.user %}
+				<li class="nav-item active">
+					<a class="nav-link" href="{{ path('app_login') }}">
+						<i class="fa fa-sign-in-alt"></i>
+					</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="{{ path('app_register') }}">
+						<i class="fa fa-user-plus"></i>
+					</a>
+				</li>
+			{% else %}
+				<li class="nav-item">
+					<a class="nav-link" href="{{ is_granted('ROLE_ADMIN') ? path('app_admin_statistique_show') : path('app_profil') }}">
+						{{ app.user.pseudo }}
+					</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="{{ path('app_logout') }}">
+						<i class="fa fa-sign-out-alt"></i>
+					</a>
+				</li>
 
-            {% endif %}
-            
-            {% if is_granted("ROLE_ADMIN") %}
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Produits
-                                
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="{{ path('app_admin_produit_index') }}">
-                            Liste
-                        </a>
-                        <a class="dropdown-item" href="{{ path('app_admin_produit_new') }}">
-                            Ajouter
-                        </a>
-                    </div>
-                </li>
+			{% endif %}
 
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Clients
-                                
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="{{ path('app_admin_client_index') }}">
-                            Liste
-                        </a>
-                        <a class="dropdown-item" href="{{ path('app_admin_client_new') }}">
-                            Ajouter
-                        </a>
-                    </div>
-                </li>
+			{% if is_granted("ROLE_ADMIN") %}
+				<li class="nav-item dropdown">
+					<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						Produits
 
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Commandes
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="{{ path('app_admin_commande_index') }}">
-                            Liste
-                        </a>
-                        <a class="dropdown-item" href="{{ path('app_admin_commande_new') }}">
-                            Ajouter
-                        </a>
-                    </div>
-                </li>
-            {% endif %}
+					</a>
+					<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+						<a class="dropdown-item" href="{{ path('app_admin_produit_index') }}">
+							Liste
+						</a>
+						<a class="dropdown-item" href="{{ path('app_admin_produit_new') }}">
+							Ajouter
+						</a>
+					</div>
+				</li>
 
-            <li class="nav-item active">
-                <a class="nav-link" href="{{ path('app_panier') }}">
-                    <i class="fa fa-shopping-cart"></i>
-                    <div id="nombre"></div>
-                </a>
-            </li>
-        </ul>
+				<li class="nav-item dropdown">
+					<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						Clients
 
-        <form class="form-inline my-2 my-lg-0" action="{{ path('app_recherche') }}">
-            <input name="search" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">
-                    Search
-                </button>
-            </form>
-        </div>
-    </nav>
-    
+					</a>
+					<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+						<a class="dropdown-item" href="{{ path('app_admin_client_index') }}">
+							Liste
+						</a>
+						<a class="dropdown-item" href="{{ path('app_admin_client_new') }}">
+							Ajouter
+						</a>
+					</div>
+				</li>
+
+				<li class="nav-item dropdown">
+					<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						Commandes
+					</a>
+					<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+						<a class="dropdown-item" href="{{ path('app_admin_commande_index') }}">
+							Liste
+						</a>
+						<a class="dropdown-item" href="{{ path('app_admin_commande_new') }}">
+							Ajouter
+						</a>
+					</div>
+				</li>
+			{% endif %}
+
+			<li class="nav-item active">
+				<a class="nav-link" href="{{ path('app_panier') }}">
+					<i class="fa fa-shopping-cart"></i>
+					<div id="nombre"></div>
+				</a>
+			</li>
+		</ul>
+
+		<form class="form-inline my-2 my-lg-0" action="{{ path('app_recherche_ajax') }}" id="formSearch">
+			<input name="search" id="search" class="form-control mr-sm-2" type="search" placeholder="Recherche" aria-label="Search">
+			<button class="btn btn-outline-success my-2 my-sm-0" type="submit">
+				Recherche
+			</button>
+		</form>
+	</div>
+</nav>
