@@ -18,7 +18,7 @@ class Extension extends AbstractExtension
         foreach ($client->getRoles() as $role) {
             $autorisations .= $autorisations ? ", " : "";
             switch ($role) {
-                case "ROLE_Admin":
+                case "ROLE_ADMIN":
                     $autorisations .= "Administrateur";
                     break;
 
@@ -38,15 +38,14 @@ class Extension extends AbstractExtension
     public function civilite(Client $client)
     {
         $civ = $client->getCivilite();
-        if( $civ === "h" ){
+        if ($civ === "h") {
             $civilite = "Monsieur";
-        }elseif( $civ === "f"){
+        } elseif ($civ === "f") {
             $civilite = "Madame";
-        }else{
+        } else {
             $civilite = "Chelou";
         }
         return $civilite;
-        
     }
 
 
