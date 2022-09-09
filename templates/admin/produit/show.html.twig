@@ -1,9 +1,8 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Produit{% endblock %}
+{% block h1 %}Produit{% endblock %}
 
 {% block body %}
-    <h1>Produit</h1>
 
     <table class="table">
         <tbody>
@@ -56,9 +55,13 @@
         </tbody>
     </table>
 
-    <a href="{{ path('app_admin_produit_index') }}"><i class="fa fa-reply"></i> Retour à la liste</a>
-
-    <a href="{{ path('app_admin_produit_edit', {'id': produit.id}) }}">edit</a>
-
+    <div class="d-flex justify-content-between">
+    <a class="btn btn-secondary" href="{{ path('app_admin_produit_index') }}" ><i class="fa fa-reply"></i> Retour à la liste</a>
+    
     {{ include('admin/produit/_delete_form.html.twig') }}
+
+    <a class="btn btn-primary" href="{{ path('app_admin_produit_edit', {'id': produit.id}) }}">Modifier</a>
+    
+    </div>
+    
 {% endblock %}

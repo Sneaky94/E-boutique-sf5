@@ -1,10 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Client
-{% endblock %}
-
-{% block h1 %}Client
-{% endblock %}
+{% block h1 %}Client{% endblock %}
 
 {% block body %}
 
@@ -57,14 +53,15 @@
 		</tbody>
 	</table>
 
+	
 	<div class="d-flex justify-content-between">
-		<a href="{{ path('app_admin_client_index') }}">
-			<i class="fa fa-reply"></i>
-			Retour à la liste</a>
-
-		<a href="{{ path('app_admin_client_edit', {'id': client.id}) }}">edit</a>
+			<a class="btn btn-secondary" href="{{ path('app_admin_client_index') }}">
+				<i class="fa fa-reply"></i> Retour à la liste
+			</a>
 
 		{{ include('admin/client/_delete_form.html.twig') }}
+
+			<a class="btn btn-primary" href="{{ path('app_admin_client_edit', {'id': client.id}) }}">Modifier</a>
 	</div>
 
 {% endblock %}

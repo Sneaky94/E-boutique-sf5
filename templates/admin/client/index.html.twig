@@ -1,12 +1,10 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Liste des clients{% endblock %}
-
 {% block h1 %}Liste des clients{% endblock %} 
 
 {% block body %}
 
-    <table class="table table-bordered">
+    <table class="table table-striped">
         <thead class="thead-dark">
             <tr>
                 <th>Id</th>
@@ -26,23 +24,24 @@
         <tbody>
         {% for client in clients %} 
             <tr>
-                <td>{{ client.id }}</td>
-                <td>{{ client.pseudo }}</td>
-                <td>{{ client|autorisations }}</td>
-                <td>{{ client.email }}</td>
-                <td>{{ client.nom }}</td>
-                <td>{{ client.prenom }}</td>
-                <td>{{ client|civilite }}</td>
-                <td>{{ client.adresse }}</td>
-                <td>{{ client.codePostal }}</td>
-                <td>{{ client.ville }}</td>
-                <td>{{ client.commandes|length }}</td>
-                <td>
+                <td id="tdListeClient">{{ client.id }}</td>
+                <td id="tdListeClient">{{ client.pseudo }}</td>
+                <td id="tdListeClient">{{ client|autorisations }}</td>
+                <td id="tdListeClient">{{ client.email }}</td>
+                <td id="tdListeClient">{{ client.nom }}</td>
+                <td id="tdListeClient">{{ client.prenom }}</td>
+                <td id="tdListeClient">{{ client|civilite }}</td>
+                <td id="tdListeClient">{{ client.adresse }}</td>
+                <td id="tdListeClient">{{ client.codePostal }}</td>
+                <td id="tdListeClient">{{ client.ville }}</td>
+                <td id="tdListeClient">{{ client.commandes|length }}</td>
+                <td id="tdListeAction2">
                     <a href="{{ path('app_admin_client_show', {'pseudo': client.pseudo}) }}">
-                        <i class="fa fa-eye"></i>
+                        <i class="fa fa-eye"></i>Afficher
                     </a>
+                    <hr>
                     <a href="{{ path('app_admin_client_edit', {'id': client.id}) }}">
-                        <i class="fa fa-edit"></i>
+                        <i class="fa fa-edit"></i> Modifier
                     </a>
                 </td>
             </tr>
@@ -54,7 +53,10 @@
         </tbody>
     </table>
 
-    <a href="{{ path('app_admin_client_new') }}" class="btn btn-primary">
-        <i class="fa fa-plus"></i> Ajouter un client
-    </a>
+    <div class="text-right">
+        <a href="{{ path('app_admin_client_new') }}" class="btn btn-primary">
+            <i class="fa fa-plus"></i> Ajouter un client
+        </a>
+    </div>
+
 {% endblock %}

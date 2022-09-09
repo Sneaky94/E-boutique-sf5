@@ -8,45 +8,51 @@ Liste des Produits
 
 {% block body %}
 
-    <table class="table table-bordered">
-        <thead class="thead-dark">
-            <tr>
-                <th>Id</th>
-                <th>Référence</th>
-                <th>Catégorie</th>
-                <th>Titre</th>
-                <th>Description</th>
-                <th>Photo</th>
-                <th>Prix</th>
-                <th>Stock</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
+
+<table class="table table-striped">
+
+    <thead class="thead-dark">
+        <tr>
+            <th>Id</th>
+            <th>Référence</th>
+            <th>Catégorie</th>
+            <th>Titre</th>
+            <th>Description</th>
+            <th>Photo</th>
+            <th>Prix</th>
+            <th>Stock</th>
+            <th>actions</th>
+        </tr>
+    </thead>
+    <tbody>
         {% for produit in produits %}
             <tr>
-                <td>{{ produit.id }}</td>
-                <td>{{ produit.reference }}</td>
-                <td>{{ produit.categorie }}</td>
-                <td>{{ produit.titre }}</td>
-                <td>{{ produit.description }}</td>
+                <td id="tdListeProduit">{{ produit.id }}</td>
+                <td id="tdListeProduit">{{ produit.reference }}</td>
+                <td id="tdListeProduit">{{ produit.categorie }}</td>
+                <td id="tdListeProduit">{{ produit.titre }}</td>
+                <td id="tdListeProduit">{{ produit.description }}</td>
                 <td>
                     <img src="{{ image_path ~ produit.photo }}" alt="image manquante" class="miniature">
                 </td>
-                <td>{{ produit.prix }}</td>
-                <td>{{ produit.stock }}</td>
-                <td>
-                    <a href="{{ path('app_admin_produit_show', {'id': produit.id}) }}">show</a>
-                    <a href="{{ path('app_admin_produit_edit', {'id': produit.id}) }}">edit</a>
+                <td id="tdListeProduit">{{ produit.prix }}</td>
+                <td id="tdListeProduit">{{ produit.stock }}</td>
+                <td id="tdListeAction">
+            <a href="{{ path('app_admin_produit_show', {'id': produit.id}) }}"><i class="fa fa-eye"></i> Afficher</a>
+            <hr>
+            <a href="{{ path('app_admin_produit_edit', {'id': produit.id}) }}"><i class="fa fa-edit"></i> Modifier</a>
                 </td>
             </tr>
         {% else %}
             <tr>
-                <td colspan="9">no records found</td>
+                <td colspan="9">Aucun enregistrement trouvé</td>
             </tr>
         {% endfor %}
-        </tbody>
-    </table>
+    </tbody>
+</table>
+<div class="text-right">
+    <a class="btn btn-primary" href="{{ path('app_admin_produit_new') }}">Creer un nouveau produit</a>
+</div>
 
-    <a href="{{ path('app_admin_produit_new') }}">Create new</a>
+
 {% endblock %}

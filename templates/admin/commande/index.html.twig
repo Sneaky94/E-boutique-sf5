@@ -1,12 +1,11 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Commande index{% endblock %}
 {% block h1 %}Liste des commandes{% endblock %}
 
 {% block body %}
 
-    <table class="table">
-        <thead>
+    <table class="table table-striped">
+        <thead class="thead-dark">
             <tr>
                 <th>Id</th>
                 <th>Client</th>
@@ -19,14 +18,15 @@
         <tbody>
         {% for commande in commandes %}
             <tr>
-                <td>{{ commande.id }}</td>
-                <td>{{ commande.client.pseudo }}</td>
-                <td>{{ commande.montant }} €</td>
-                <td>{{ commande.dateEnregistrement ? commande.dateEnregistrement|date('d/m/Y H:i:s') : '' }}</td>
-                <td>{{ commande.etat }}</td>
-                <td>
-                    <a href="{{ path('app_admin_commande_show', {'id': commande.id}) }}">show</a>
-                    <a href="{{ path('app_admin_commande_edit', {'id': commande.id}) }}">edit</a>
+                <td id="tdListeCommande">{{ commande.id }}</td>
+                <td id="tdListeCommande">{{ commande.client.pseudo }}</td>
+                <td id="tdListeCommande">{{ commande.montant }} €</td>
+                <td id="tdListeCommande">{{ commande.dateEnregistrement ? commande.dateEnregistrement|date('d/m/Y H:i:s') : '' }}</td>
+                <td id="tdListeCommande">{{ commande.etat }}</td>
+                <td id="tdListeAction3">
+                    <a href="{{ path('app_admin_commande_show', {'id': commande.id}) }}"><i class="fa fa-eye"></i> Afficher</a>
+                    <hr>
+                    <a href="{{ path('app_admin_commande_edit', {'id': commande.id}) }}"><i class="fa fa-edit"></i> Modifier</a>
                 </td>
             </tr>
         {% else %}
@@ -37,5 +37,7 @@
         </tbody>
     </table>
 
-    <a href="{{ path('app_admin_commande_new') }}">Create new</a>
+    <div class="text-right">
+        <a class="btn btn-primary" href="{{ path('app_admin_commande_new') }}">Creer une nouvelle commande</a>
+    </div>
 {% endblock %}

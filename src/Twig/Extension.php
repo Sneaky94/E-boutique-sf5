@@ -42,8 +42,10 @@ class Extension extends AbstractExtension
             $civilite = "Monsieur";
         } elseif ($civ === "f") {
             $civilite = "Madame";
+        } elseif ($civ === "a") {
+            $civilite = "NSP";
         } else {
-            $civilite = "Chelou";
+            $civilite = "Non Renseigné";
         }
         return $civilite;
     }

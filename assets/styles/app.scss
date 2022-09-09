@@ -2,7 +2,6 @@
 $primary: #3b4f84;
 
 // Debut du style des élements de la nav :
-
 #linkSignInIcon{
     color: green;
 }
@@ -44,12 +43,10 @@ $primary: #3b4f84;
 #btnRecherche{
     color: white;
 }
-
 // Fin du style des élements de la nav !
 
 
 // Debut du style des bouton "voir" , "ajouter au panier" , inputQte
-
 #btnVoir{
     display: flex;
     justify-content: center;
@@ -72,18 +69,33 @@ $primary: #3b4f84;
 }
 // Fin du style des bouton "voir" , "ajouter au panier" , inputQte
 
-// card qui contien les articles page ( card.html.twig )
+// card qui contien les articles page           ( card.html.twig )
 #cardRef{
     margin-right: 0;
     margin-left: 0;
 }
+
+// Début du style de l'array produit admin      ( template/admin/produit/index.html.twig )
+// Début du style de l'array Client             ( template/admin/client/index.html.twig )
+// Début du style de l'array commandes admin    ( template/admin/commande/index.html.twig )
+
+#tdListeProduit, #tdListeClient , #tdListeCommande {
+    vertical-align: middle;
+}
+
+#tdListeAction , #tdListeAction2 , #tdListeAction3 {
+    text-align: center;
+}
+// Fin du style de la liste produit admin ( template/admin/produit/index.html.twig )
+// Fin du style de la liste Client ( template/admin/client/index.html.twig )
+// Fin du style de la liste commandes admin ( template/admin/commande/index.html.twig )
 
 @import "~@fortawesome/fontawesome-free/css/all.min.css";
 @import "~bootstrap/scss/bootstrap";
 
 
 body {
-    background-color: white;
+    background-color: #ffffff;
 }
 .vignette {
     height: 100px;
