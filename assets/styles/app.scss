@@ -5,15 +5,32 @@ $primary: #3b4f84;
 #linkSignInIcon{
     color: green;
 }
+#linkSignInIcon:hover{
+    color: green;
+    box-shadow: 0 0 3px black;
+    margin-top: -5px;
+}
 
 #linkUserPlusIcon{
     color: blue;
+}
+
+#linkUserPlusIcon:hover{
+    color: blue;
+    box-shadow: 0 0 3px black;
+    margin-top: -5px;
 }
 
 // le logo du panier (cadie)
 .fa-shopping-cart{
     color: orange;
 }
+
+.fa-shopping-cart:hover{
+    transform: rotate(10turn);
+    transition: transform 10s ease-in-out;
+}
+
 
 // le nombre d'article qui s'ajoute en haut du panier
 #nombre{
@@ -31,6 +48,12 @@ $primary: #3b4f84;
     color: red;
 }
 
+#LinkSignOutIcon:hover{
+    color: red;
+    box-shadow: 0 0 3px black;
+    margin-top: -5px;
+}
+
 #navbarDropdown{
     color: white;
 }
@@ -38,6 +61,11 @@ $primary: #3b4f84;
 // La div en position absolute pour gere le numero qui s'ajouter en haut du panier
 .supportNombrePanier{
     position: relative;
+}
+
+.supportNombrePanier:hover{
+    transform: rotate(10turn);
+    transition: transform 10s ease-in-out;
 }
 
 #btnRecherche{
@@ -90,6 +118,8 @@ $primary: #3b4f84;
 // Fin du style de la liste Client ( template/admin/client/index.html.twig )
 // Fin du style de la liste commandes admin ( template/admin/commande/index.html.twig )
 
+
+
 @import "~@fortawesome/fontawesome-free/css/all.min.css";
 @import "~bootstrap/scss/bootstrap";
 
@@ -97,7 +127,22 @@ $primary: #3b4f84;
 body {
     background-color: #ffffff;
 }
+
+footer{
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: baseline;
+    width: 100%;
+    position: relative;
+    bottom: -8px;
+    background: linear-gradient(grey, black);
+    box-shadow: 1px 0px 8px 0px grey;
+}
+
 .vignette {
     height: 100px;
     width: auto;
 }
+
+
