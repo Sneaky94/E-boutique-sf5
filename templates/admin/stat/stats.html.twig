@@ -1,8 +1,5 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Admin dashboard
-{% endblock %}
-
 {% block h1 %}Tableau de bord
 {% endblock %}
 
@@ -20,7 +17,8 @@
 				<div class="card-header bg-dark text-danger">PRODUITS</div>
 				<div class="card-body">
                 <p>Nombre de produits : {{ produits|length }} </p>
-                <p>Le plus commandé : {{ produitFavori.titre }} - réf: {{ produitFavori.reference }} </p>
+				<p>Le plus commandé : {{ produitFavori.titre }} </p>
+				<p>Réf: {{ produitFavori.reference }} </p>
                 </div>
 				<div class="card-footer bg-dark"></div>
 			</div>

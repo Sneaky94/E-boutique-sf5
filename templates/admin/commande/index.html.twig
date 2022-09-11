@@ -18,12 +18,12 @@
         <tbody>
         {% for commande in commandes %}
             <tr>
-                <td id="tdListeCommande">{{ commande.id }}</td>
-                <td id="tdListeCommande">{{ commande.client.pseudo }}</td>
-                <td id="tdListeCommande">{{ commande.montant }} €</td>
-                <td id="tdListeCommande">{{ commande.dateEnregistrement ? commande.dateEnregistrement|date('d/m/Y H:i:s') : '' }}</td>
-                <td id="tdListeCommande">{{ commande.etat }}</td>
-                <td id="tdListeAction3">
+                <td class="align-middle">{{ commande.id }}</td>
+                <td class="align-middle">{{ commande.client.pseudo }}</td>
+                <td class="align-middle">{{ commande.montant }} €</td>
+                <td class="align-middle">{{ commande.dateEnregistrement ? commande.dateEnregistrement|date('d/m/Y H:i:s') : '' }}</td>
+                <td class="align-middle">{{ commande.etat }}</td>
+                <td class="text-center">
                     <a href="{{ path('app_admin_commande_show', {'id': commande.id}) }}"><i class="fa fa-eye"></i> Afficher</a>
                     <hr>
                     <a href="{{ path('app_admin_commande_edit', {'id': commande.id}) }}"><i class="fa fa-edit"></i> Modifier</a>

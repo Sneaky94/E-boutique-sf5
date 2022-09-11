@@ -7,35 +7,35 @@
     <table class="table table-striped">
         <thead class="thead-dark">
             <tr>
-                <th>Id</th>
-                <th>Pseudo</th>
-                <th>Rôles</th>
-                <th>Email</th>
-                <th>Nom</th>
-                <th>Prenom</th>
-                <th>Civilité</th>
-                <th>Adresse</th>
-                <th>Code postal</th>
-                <th>Ville</th>
-                <th>Nb commandes</th>
-                <th>actions</th>
+                <th class="align-middle">Id</th>
+                <th class="align-middle">Pseudo</th>
+                <th class="align-middle">Rôles</th>
+                <th class="align-middle">Email</th>
+                <th class="align-middle">Nom</th>
+                <th class="align-middle">Prenom</th>
+                <th class="align-middle">Civilité</th>
+                <th class="align-middle">Adresse</th>
+                <th class="align-middle">Code postal</th>
+                <th class="align-middle">Ville</th>
+                <th class="align-middle">Nb commandes</th>
+                <th class="align-middle">actions</th>
             </tr>
         </thead>
         <tbody>
         {% for client in clients %} 
             <tr>
-                <td id="tdListeClient">{{ client.id }}</td>
-                <td id="tdListeClient">{{ client.pseudo }}</td>
-                <td id="tdListeClient">{{ client|autorisations }}</td>
-                <td id="tdListeClient">{{ client.email }}</td>
-                <td id="tdListeClient">{{ client.nom }}</td>
-                <td id="tdListeClient">{{ client.prenom }}</td>
-                <td id="tdListeClient">{{ client|civilite }}</td>
-                <td id="tdListeClient">{{ client.adresse }}</td>
-                <td id="tdListeClient">{{ client.codePostal }}</td>
-                <td id="tdListeClient">{{ client.ville }}</td>
-                <td id="tdListeClient">{{ client.commandes|length }}</td>
-                <td id="tdListeAction2">
+                <td class="align-middle">{{ client.id }}</td>
+                <td class="align-middle">{{ client.pseudo }}</td>
+                <td class="align-middle">{{ client|autorisations }}</td>
+                <td class="align-middle">{{ client.email }}</td>
+                <td class="align-middle">{{ client.nom }}</td>
+                <td class="align-middle">{{ client.prenom }}</td>
+                <td class="align-middle">{{ client|civilite }}</td>
+                <td class="align-middle">{{ client.adresse }}</td>
+                <td class="align-middle">{{ client.codePostal }}</td>
+                <td class="align-middle">{{ client.ville }}</td>
+                <td class="align-middle">{{ client.commandes|length }}</td>
+                <td class="text-center">
                     <a href="{{ path('app_admin_client_show', {'pseudo': client.pseudo}) }}">
                         <i class="fa fa-eye"></i>Afficher
                     </a>

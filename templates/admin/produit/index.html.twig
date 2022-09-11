@@ -27,17 +27,17 @@ Liste des Produits
     <tbody>
         {% for produit in produits %}
             <tr>
-                <td id="tdListeProduit">{{ produit.id }}</td>
-                <td id="tdListeProduit">{{ produit.reference }}</td>
-                <td id="tdListeProduit">{{ produit.categorie }}</td>
-                <td id="tdListeProduit">{{ produit.titre }}</td>
-                <td id="tdListeProduit">{{ produit.description }}</td>
+                <td class="align-middle">{{ produit.id }}</td>
+                <td class="align-middle">{{ produit.reference }}</td>
+                <td class="align-middle">{{ produit.categorie }}</td>
+                <td class="align-middle">{{ produit.titre }}</td>
+                <td class="align-middle">{{ produit.description }}</td>
                 <td>
                     <img src="{{ image_path ~ produit.photo }}" alt="image manquante" class="miniature">
                 </td>
-                <td id="tdListeProduit">{{ produit.prix }}</td>
-                <td id="tdListeProduit">{{ produit.stock }}</td>
-                <td id="tdListeAction">
+                <td class="align-middle">{{ produit.prix }}</td>
+                <td class="align-middle">{{ produit.stock }}</td>
+                <td class="text-center">
             <a href="{{ path('app_admin_produit_show', {'id': produit.id}) }}"><i class="fa fa-eye"></i> Afficher</a>
             <hr>
             <a href="{{ path('app_admin_produit_edit', {'id': produit.id}) }}"><i class="fa fa-edit"></i> Modifier</a>
