@@ -31,13 +31,19 @@ class StatController extends AbstractController
 
         $produitFavori = $pr->produitBestSeller()[0]["produit"];
       
+
+        $stockBas = $pr->produitStock();
+
         return $this->render('admin/stat/stats.html.twig', [
             "clients" => $clientRepository->findAll(),
             "commandes" => $cr->findAll(),
             "produits" => $produits,
-            "produitFavori" => $produitFavori
+            "produitFavori" => $produitFavori,
+            "stockBas" => $stockBas
         ]);
     }
+
+
 
 }
  

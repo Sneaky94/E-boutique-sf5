@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+
 use App\Entity\Commande;
 use App\Repository\ProduitRepository;
 use Symfony\Component\HttpFoundation\Response;
@@ -24,6 +25,7 @@ class ProfilController extends AbstractController
             Mais on peut récupérer l'utilisateur connecté directement dans un fichier Twig avec :
                 app.user
         */
+    
         return $this->render('profil/index.html.twig');
     }
 
@@ -56,4 +58,5 @@ class ProfilController extends AbstractController
         // return $this->redirectToRoute("app_home");
     }
 
+    
 }

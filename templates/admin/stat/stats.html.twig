@@ -8,7 +8,9 @@
 		<div class="col-4 my-2">
 			<div class="card">
 				<div class="card-header bg-dark text-danger">CLIENT</div>
-				<div class="card-body">Nombre de clients : {{ clients|length }} </div>
+				<div class="card-body">Nombre de clients :
+					{{ clients|length }}
+				</div>
 				<div class="card-footer bg-dark"></div>
 			</div>
 		</div>
@@ -16,17 +18,43 @@
 			<div class="card">
 				<div class="card-header bg-dark text-danger">PRODUITS</div>
 				<div class="card-body">
-                <p>Nombre de produits : {{ produits|length }} </p>
-				<p>Le plus commandé : {{ produitFavori.titre }} </p>
-				<p>Réf: {{ produitFavori.reference }} </p>
-                </div>
+					<p>Nombre de produits :
+						{{ produits|length }}
+					</p>
+					<p>Le plus commandé :
+						{{ produitFavori.titre }}
+					</p>
+					<p>Réf:
+						{{ produitFavori.reference }}
+					</p>
+				</div>
 				<div class="card-footer bg-dark"></div>
 			</div>
 		</div>
 		<div class="col-4 my-2">
 			<div class="card">
 				<div class="card-header bg-dark text-danger">COMMANDES</div>
-				<div class="card-body">Nombre de commandes : {{ commandes|length }} </div>
+				<div class="card-body">Nombre de commandes :
+					{{ commandes|length }}
+				</div>
+				<div class="card-footer bg-dark"></div>
+			</div>
+		</div>
+
+		<div class="col-6 my-2">
+			<div class="card">
+				<div class="card-header bg-dark text-danger">STOCK BAS</div>
+				<div class="card-body"><h5>Produits en manque de stock : {{ stockBas|length }}</h5>
+					
+				</div>
+				{% if stockBas|length > 0 %}
+					{% for item in stockBas %}
+						<div class="card-body">Produits restant pour 
+							<a href=" {{ path("app_admin_produit_edit" , {id: item.id} ) }} ">{{ item.titre }}</a> :
+							 {{ item.stock }}
+						</div>
+					{% endfor %}
+				{% endif %}
 				<div class="card-footer bg-dark"></div>
 			</div>
 		</div>

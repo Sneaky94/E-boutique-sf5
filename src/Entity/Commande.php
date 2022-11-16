@@ -2,10 +2,11 @@
 
 namespace App\Entity;
 
-use App\Repository\CommandeRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
+use App\Entity\AdresseLivraison;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\CommandeRepository;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * @ORM\Entity(repositoryClass=CommandeRepository::class)
@@ -44,6 +45,13 @@ class Commande
      * @ORM\OneToMany(targetEntity=Detail::class, mappedBy="commande", orphanRemoval=true)
      */
     private $details;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=adresseLivraison::class, inversedBy="commandes")
+     */
+    private $adresse_livraison;
+
+
 
     public function __construct()
     {
@@ -132,4 +140,17 @@ class Commande
 
         return $this;
     }
+
+    public function getAdresseLivraison(): ?AdresseLivraison
+    {
+        return $this->adresse_livraison;
+    }
+
+    public function setAdresseLivraison(?AdresseLivraison $adresse_livraison): self
+    {
+        $this->adresse_livraison = $adresse_livraison;
+
+        return $this;
+    }
+
 }

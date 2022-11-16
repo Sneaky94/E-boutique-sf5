@@ -6,9 +6,13 @@ use DateTime;
 use App\Entity\Detail;
 use App\Entity\Produit;
 use App\Entity\Commande;
+use App\Entity\AdresseLivraison;
+use App\Entity\Client;
+use App\Form\AdresseLivraisonType;
 use App\Repository\ProduitRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
+use App\Repository\AdresseLivraisonRepository;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
@@ -30,7 +34,42 @@ class PanierController extends AbstractController
             'panier' => $panier,
         ]);
     }
+    /**
+     * @Route("/valider-commande", name="app_panier_passer_la_commande")
+     */
+    public function index2(Session $session, Request $request, AdresseLivraisonRepository $adresseLivraisonRepository ): Response
+    {
+       
+        $panier = $session->get("panier", []);
+        // return $this->render('panier/passer_la_commande.html.twig', [
+        //     'panier' => $panier,
 
+        // ]);
+
+        $adresseLivraison = new AdresseLivraison();
+        $form = $this->createForm(AdresseLivraisonType::class, $adresseLivraison);
+        $form->handleRequest($request);
+       
+
+        $adresses = $adresseLivraisonRepository->recherche($this->getUser());
+
+
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $client = $this->getUser();
+            $adresseLivraison->setClient($client);
+            $adresseLivraisonRepository->add($adresseLivraison, true);
+            return $this->redirectToRoute('app_panier_passer_la_commande', [], Response::HTTP_SEE_OTHER);
+        }
+
+        return $this->renderForm('panier/passer_la_commande.html.twig', [
+            'adresse_livraison' => $adresseLivraison,
+            'form' => $form,
+            'panier' => $panier,
+            'adresses' => $adresses ? $adresses : null
+        ]);
+
+    }
 
     /**
      * @Route("/ajouter-produit-{id}", name="app_panier_ajouter", requirements={"id"="\d+"})
@@ -139,9 +178,9 @@ class PanierController extends AbstractController
             $cmd->setMontant($montant);
             $em->persist($cmd);
             $em->flush(); // Toutes les requetes en attente sont executées
+            // $this->addFlash("success", "Votre commande a été enregistrée");
             $session->remove("panier");
-            $this->addFlash("success", "Votre commande a été enregistrée");
-            return $this->redirectToRoute("app_panier");
+            return $this->redirectToRoute("app_home");
         }
         $this->addFlash("danger", "Le panier est vide. Vous ne pouvez pas valider la commande.");
         return $this->redirectToRoute("app_panier");

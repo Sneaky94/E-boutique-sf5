@@ -72,6 +72,7 @@ class RegistrationFormType extends AbstractType
             ])
             ->add("nom")
             ->add("adresse", TextareaType::class)
+            ->add('telephone')
             ->add("code_postal", TextType::class, [
                 "label" => "Code postal",
                 "constraints" => [
@@ -83,6 +84,7 @@ class RegistrationFormType extends AbstractType
                     "required" => false
             ])
             ->add("ville")
+            ->add("pays")
             ->add("email", EmailType::class, [
                 "required" => false
             ])

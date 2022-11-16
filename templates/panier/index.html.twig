@@ -45,10 +45,10 @@
 
         <tfoot class="thead-dark">
             <tr>
-                <th colspan="3">Total</th>
+                <th colspan="3">Sous-Total</th>
                 <td>{{ total }} €
                     {% if panier|length %}
-                <a href="{{ path('app_panier_valider') }}" class="btn btn-success float-right">
+                <a href="{{ path('app_panier_passer_la_commande') }}" class="btn btn-success float-right">
                 <i class="fa fa-cash-register"></i> Passer la commande
             </a>
         {% endif %}

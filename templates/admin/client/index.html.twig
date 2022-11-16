@@ -15,8 +15,10 @@
                 <th class="align-middle">Prenom</th>
                 <th class="align-middle">Civilité</th>
                 <th class="align-middle">Adresse</th>
+                <th class="align-middle">Telephone</th>
                 <th class="align-middle">Code postal</th>
                 <th class="align-middle">Ville</th>
+                <th class="align-middle">Pays</th>
                 <th class="align-middle">Nb commandes</th>
                 <th class="align-middle">actions</th>
             </tr>
@@ -32,8 +34,10 @@
                 <td class="align-middle">{{ client.prenom }}</td>
                 <td class="align-middle">{{ client|civilite }}</td>
                 <td class="align-middle">{{ client.adresse }}</td>
+                <td class="align-middle">{{ client.telephone }}</td>
                 <td class="align-middle">{{ client.codePostal }}</td>
                 <td class="align-middle">{{ client.ville }}</td>
+                <td class="align-middle">{{ client.pays }}</td>
                 <td class="align-middle">{{ client.commandes|length }}</td>
                 <td class="text-center">
                     <a href="{{ path('app_admin_client_show', {'pseudo': client.pseudo}) }}">

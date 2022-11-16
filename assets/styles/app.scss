@@ -101,16 +101,64 @@ $primary: #3b4f84;
 #cardRef{
     margin-right: 0;
     margin-left: 0;
+    // background-color: transparent;
 }
 
+.CardLogin{
+    color: white;
+    background-image: url(/public/images/istockphoto-952039286-612x612.jpg)
+}
 
+.imgPanier{
+    height: 100px;
+    width: auto;
+}
+
+// formulaire NewAdresse 
+.content {
+    display: none;
+    overflow: hidden;
+  }
+
+  .container{
+    position: relative;
+  }
+
+//   .container::before {
+//     background-image: url(/public/images/left-bar.png);
+//     width: 114px;
+//     position: absolute;
+//     z-index: -1;
+//     top: 100px;
+//     left: -99px;
+//     height: calc(100% - 153px - 0px);
+//     content: " ";
+//   }
+//   .container::after {
+//     background-image: url(/public/images/right-bar.png);
+//     width: 114px;
+//     position: absolute;
+//     z-index: -1;
+//     top: 96px;
+//     right: -98px;
+//     height: calc(100% - 153px - 0px);
+//     content: " ";
+//   }
+
+h1{
+    color: white;
+}
 
 @import "~@fortawesome/fontawesome-free/css/all.min.css";
 @import "~bootstrap/scss/bootstrap";
 
 
 body {
-    background-color: #ffffff;
+    background-image: url("/public/images/123456789.jpg");
+    background-size: 100vw;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    // color: white;
 }
 
 footer{

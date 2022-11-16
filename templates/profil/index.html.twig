@@ -10,14 +10,18 @@
             <strong>Pseudo : </strong>{{ app.user.pseudo }}
         </li>
         <li class="list-group-item">
-            <strong>Identité : </strong>{{ app.user.prenom ~ " " ~ app.user.nom }}
+            <strong>Identité : </strong>{{ app.user.prenom ~ " - " ~ app.user.nom }}
         </li>
         <li class="list-group-item">
-            <strong>Adresse : </strong>{{ app.user.adresse ~ " " ~ app.user.codePostal ~ " " ~ app.user.ville }}
+            <strong>Adresse : </strong>{{ app.user.adresse ~ " - " ~ app.user.codePostal ~ " - " ~ app.user.ville ~ " - " ~ app.user.pays }}
         </li>
 
         <li class="list-group-item">
             <strong>E-mail : </strong>{{ app.user.email }}
+        </li>
+
+        <li class="list-group-item">
+            <strong>Telephone : </strong>{{ app.user.telephone }}
         </li>
 
         <li class="list-group-item">

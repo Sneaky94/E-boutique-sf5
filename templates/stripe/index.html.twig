@@ -1,0 +1,181 @@
+{% extends 'base.html.twig' %}
+
+{% block h1 %}Page de paiement{% endblock %}
+
+{% block body %}
+
+
+
+<body>
+
+    <table class="table">
+	<thead class="thead-dark">
+		<tr>
+			<th colspan="4">Détail du panier</th>
+			<th>
+				<a href="{{ path('app_panier_vider') }}" title="Vider le panier">
+					<i class="fa fa-trash"></i>
+				</a>
+			</th>
+		</tr>
+		<tr>
+			<th>Photo</th>
+			<th>Produit</th>
+			<th>Prix</th>
+			<th>Qté</th>
+			<th>Total</th>
+		</tr>
+	</thead>
+	<tbody>
+		{% set total = 0 %}
+		{% for ligne in panier %}
+			<tr>
+				<td>
+					<img class="imgPanier" src="{{ image_path ~ ligne.produit.photo }}">
+				</td>
+				<td>{{ ligne.produit.titre }}</td>
+				<td>{{ ligne.produit.prix }}€</td>
+				<td>
+					{{ ligne.quantite }}
+				</td>
+				<td>
+					{{ ligne.quantite * ligne.produit.prix }}€
+					<a href="{{ path("app_panier_supprimer", {id: ligne.produit.id}) }}" title="Supprimer un article" onclick="return confirm('Confirmer la suppression ?')">
+						<i class="fa fa-times text-danger"></i>
+					</a>
+				</td>
+			</tr>
+			{% set total = total + ligne.quantite * ligne.produit.prix %}
+		{% else %}
+			<tr>
+				<td colspan="4">Le panier est vide... pour l'instant</td>
+			</tr>
+		{% endfor %}
+	</tbody>
+
+	<tfoot class="thead-dark">
+		<tr>
+			<th colspan="4">Sous-Total</th>
+			<td>{{ total }}
+				€
+				{% if panier|length %}
+				</td>
+			</td>
+		</tr>
+	</tfoot>
+</table>
+
+<div>
+	<table class="table">
+		<thead class="thead-light">
+			<tr>
+				<th colspan="9">Adresse de livraison</th>
+			</tr>
+			<tr>
+				<th>Nom</th>
+				<th>Prenom</th>
+				<th>Adresse</th>
+				<th>Ville</th>
+				<th>Code postal</th>
+				<th>Pays</th>
+				<th>Telephone</th>
+			</tr>
+		</thead>
+
+		<tbody>
+			<tr>
+				<td>{{ app.user.nom }}</td>
+				<td>{{ app.user.prenom }}</td>
+				<td>{{ app.user.adresse }}</td>
+				<td>{{ app.user.ville }}</td>
+				<td>{{ app.user.codePostal }}</td>
+				<td>{{ app.user.pays }}</td>
+				<td>{{ app.user.telephone }}</td>
+			</tr>
+		</tbody>
+
+		<tfoot class="thead-light">
+			<th colspan="9">
+			</th>
+		</tfoot>
+	</table>
+
+
+
+
+
+
+    {# AJOUTER     METHODE     DE      LIVRAISON   ICI ( colissimo , mondial relay ou autre )  #}
+
+
+
+
+
+
+</div>
+{% endif %}
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-4">
+                <div class="card">
+                    <div class="card-body">
+                        {% for message in app.flashes('success') %}
+                            <div 
+                                style="color: green;
+                                    border: 2px green solid;
+                                    text-align: center;
+                                    padding: 5px;margin-bottom: 10px;">
+                                {{ message }}
+                            </div>
+                        {% endfor %}
+ 
+                        <form id='checkout-form' method='post' action="{{ path('app_stripe_charge') }}">             
+                            <input type='hidden' name='stripeToken' id='stripe-token-id'>                              
+                            <label for="card-element" class="mb-5">Formulaire Carte</label>
+                            <br>
+                            <div id="card-element" class="form-control" ></div>
+                            <button 
+                                id='pay-btn'
+                                class="btn btn-success mt-3"
+                                type="button"
+                                style="margin-top: 20px; width: 100%;padding: 7px;"
+                                onclick="createToken()">Payer 
+                            </button>
+                        <form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+   
+
+
+    <script src="https://js.stripe.com/v3/" ></script>
+    <script>
+
+        var stripe = Stripe("{{stripe_key}}");
+        var elements = stripe.elements();
+        var cardElement = elements.create('card');
+        cardElement.mount('#card-element');
+    
+        function createToken() {
+            document.getElementById("pay-btn").disabled = true;
+            stripe.createToken(cardElement).then(function(result) {
+    
+                    
+                if(typeof result.error != 'undefined') {
+                    document.getElementById("pay-btn").disabled = false;
+                    alert(result.error.message);
+                }
+    
+                // creating token success
+                if(typeof result.token != 'undefined') {
+                    document.getElementById("stripe-token-id").value = result.token.id;
+                    document.getElementById('checkout-form').submit();
+                }
+            });
+        }
+    </script>
+</body>
+{% endblock %}

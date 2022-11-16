@@ -2,7 +2,7 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
+        <title>{% block title %}Acceuil{% endblock %}</title>
         <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
 
 
@@ -23,39 +23,39 @@
         {% endblock %}
     </head>
     <body>
-        <div class="container">
-            {% block nav %}
-                {{ include("nav.html.twig") }}
-            {% endblock %}
-
-            {{ include("messages.html.twig") }}
-
-            <div id="main">
-            <h1>{% block h1 %}Bienvenue {% endblock %}</h1>
-
-            {% block body %}
-                <p>Ceci est le contenu de la balise <code>block body</code> du fichier 
-                    <mark>base.html.twig</mark>
-                </p>
-                <p>Le nombre est {{ nombre }}</p>
-                <p>Bonjour M. {{ nom }}</p>
-            {% endblock %}
-            </div>
-            
-            <footer>
-                {% block footer %}
-                      <div class="iconPaiement" style="padding: 10px;">
-                        <i id="iFooter" class="fab fa-cc-visa"></i>
-                        <i class="fab fa-cc-mastercard"></i>
-                        <i class="fab fa-cc-amazon-pay"></i>
-                        <i class="fab fa-cc-paypal"></i>
-                        <i class="fab fa-cc-amazon-pay"></i>
-                        <i class="fab fa-cc-stripe"></i>
-                    </div>
-
+            <div class="container">
+                {% block nav %}
+                    {{ include("nav.html.twig") }}
                 {% endblock %}
-            </footer>
-        </div>
+
+                {{ include("messages.html.twig") }}
+
+                <div id="main">
+                <h1>{% block h1 %}Bienvenue {% endblock %}</h1>
+
+                {% block body %}
+                    <p>Ceci est le contenu de la balise <code>block body</code> du fichier 
+                        <mark>base.html.twig</mark>
+                    </p>
+                    <p>Le nombre est {{ nombre }}</p>
+                    <p>Bonjour M. {{ nom }}</p>
+                {% endblock %}
+                </div>
+                
+                <footer>
+                    {% block footer %}
+                        <div class="iconPaiement" style="padding: 10px;">
+                            <i class="fab fa-cc-visa"></i>
+                            <i class="fab fa-cc-mastercard"></i>
+                            <i class="fab fa-cc-amazon-pay"></i>
+                            <i class="fab fa-cc-paypal"></i>
+                            <i class="fab fa-cc-amazon-pay"></i>
+                            <i class="fab fa-cc-stripe"></i>
+                        </div>
+
+                    {% endblock %}
+                </footer>
+            </div>
     </body>
 </html>
 

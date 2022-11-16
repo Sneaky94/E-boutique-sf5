@@ -1,0 +1,55 @@
+{% extends 'base.html.twig' %}
+
+{% block h1 %}Adresse de livraison
+{% endblock %}
+
+{% block body %}
+
+	<table class="table table-striped">
+		<thead class="thead-dark">
+			<tr>
+				<th>Id</th>
+				<th>Nom</th>
+				<th>Prenom</th>
+				<th>Civilite</th>
+				<th>Adresse</th>
+				<th>Code_postal</th>
+				<th>Ville</th>
+				<th>Pays</th>
+				<th>Telephone</th>
+				<th>actions</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for adresse_livraison in adresse_livraisons %}
+				<tr>
+					<td class="align-middle">{{ adresse_livraison.id }}</td>
+					<td class="align-middle">{{ adresse_livraison.nom }}</td>
+					<td class="align-middle">{{ adresse_livraison.prenom }}</td>
+					<td class="align-middle">{{ adresse_livraison.civilite }}</td>
+					<td class="align-middle">{{ adresse_livraison.adresse }}</td>
+					<td class="align-middle">{{ adresse_livraison.codePostal }}</td>
+					<td class="align-middle">{{ adresse_livraison.ville }}</td>
+					<td class="align-middle">{{ adresse_livraison.pays }}</td>
+					<td class="align-middle">{{ adresse_livraison.telephone }}</td>
+					<td class="text-center">
+						<a href="{{ path('admin_app_adresse_livraison_show', {'id': adresse_livraison.id}) }}">
+							<i class="fa fa-eye"></i>
+							Afficher</a>
+						<hr>
+						<a href="{{ path('admin_app_adresse_livraison_edit', {'id': adresse_livraison.id}) }}">
+							<i class="fa fa-edit"></i>
+							Modifier</a>
+					</td>
+				</tr>
+			{% else %}
+				<tr>
+					<td colspan="10">Aucun enregistrement trouvé</td>
+				</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+	<div class="text-right">
+		<a class="btn btn-primary" href="{{ path('admin_app_adresse_livraison_new') }}">Créer Nouvelle adresse</a>
+	</div>
+{% endblock %}

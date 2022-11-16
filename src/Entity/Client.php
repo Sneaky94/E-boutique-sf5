@@ -2,13 +2,14 @@
 
 namespace App\Entity;
 
-use App\Repository\ClientRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
+use App\Entity\Commande;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\ClientRepository;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
-use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * @ORM\Entity(repositoryClass=ClientRepository::class)
@@ -74,15 +75,31 @@ class Client implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $ville;
 
+      /**
+     * @ORM\Column(type="string", length=30, nullable=true)
+     */
+    private $pays;
+
+    /**
+     * @ORM\Column(type="string", length=180, unique=true)
+     */
+    private $telephone;
+
     /**
      * @ORM\OneToMany(targetEntity=Commande::class, mappedBy="client", orphanRemoval=true)
      */
     private $commandes;
 
+    /**
+     * @ORM\OneToMany(targetEntity=AdresseLivraison::class, mappedBy="client")
+     */
+    private $adresseLivraisons;
+
     public function __construct()
     {
-        $this->commandes = new ArrayCollection();
+        $this->adresseLivraisons = new ArrayCollection();
     }
+
 
     public function getId(): ?int
     {
@@ -257,6 +274,30 @@ class Client implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
+    public function getPays(): ?string
+    {
+        return $this->pays;
+    }
+
+    public function setPays(?string $pays): self
+    {
+        $this->pays = $pays;
+
+        return $this;
+    }
+
+    public function getTelephone(): ?string
+    {
+        return $this->telephone;
+    }
+
+    public function setTelephone(?string $telephone): self
+    {
+        $this->telephone = $telephone;
+
+        return $this;
+    }
+
     /**
      * @return Collection<int, Commande>
      */
@@ -281,6 +322,36 @@ class Client implements UserInterface, PasswordAuthenticatedUserInterface
             // set the owning side to null (unless already changed)
             if ($commande->getClient() === $this) {
                 $commande->setClient(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, AdresseLivraison>
+     */
+    public function getAdresseLivraisons(): Collection
+    {
+        return $this->adresseLivraisons;
+    }
+
+    public function addAdresseLivraison(AdresseLivraison $adresseLivraison): self
+    {
+        if (!$this->adresseLivraisons->contains($adresseLivraison)) {
+            $this->adresseLivraisons[] = $adresseLivraison;
+            $adresseLivraison->setClient($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAdresseLivraison(AdresseLivraison $adresseLivraison): self
+    {
+        if ($this->adresseLivraisons->removeElement($adresseLivraison)) {
+            // set the owning side to null (unless already changed)
+            if ($adresseLivraison->getClient() === $this) {
+                $adresseLivraison->setClient(null);
             }
         }
 

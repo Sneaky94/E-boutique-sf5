@@ -1,0 +1,186 @@
+{% extends 'base.html.twig' %}
+
+{% block h1 %}Votre panier
+{% endblock %}
+
+
+{% block body %}
+
+<table class="table">
+	<thead class="thead-dark">
+		<tr>
+			<th colspan="4">Détail du panier</th>
+			<th>
+				<a href="{{ path('app_panier_vider') }}" title="Vider le panier">
+					<i class="fa fa-trash"></i>
+				</a>
+			</th>
+		</tr>
+		<tr>
+			<th>Photo</th>
+			<th>Produit</th>
+			<th>Prix</th>
+			<th>Qté</th>
+			<th>Total</th>
+		</tr>
+	</thead>
+	<tbody>
+		{% set total = 0 %}
+		{% for ligne in panier %}
+			<tr>
+				<td>
+					<img class="imgPanier" src="{{ image_path ~ ligne.produit.photo }}">
+				</td>
+				<td>{{ ligne.produit.titre }}</td>
+				<td>{{ ligne.produit.prix }}€</td>
+				<td>
+					{{ ligne.quantite }}
+				</td>
+				<td>
+					{{ ligne.quantite * ligne.produit.prix }}€
+					<a href="{{ path("app_panier_supprimer", {id: ligne.produit.id}) }}" title="Supprimer un article" onclick="return confirm('Confirmer la suppression ?')">
+						<i class="fa fa-times text-danger"></i>
+					</a>
+				</td>
+			</tr>
+			{% set total = total + ligne.quantite * ligne.produit.prix %}
+		{% else %}
+			<tr>
+				<td colspan="4">Le panier est vide... pour l'instant</td>
+			</tr>
+		{% endfor %}
+	</tbody>
+
+	<tfoot class="thead-dark">
+		<tr>
+			<th colspan="4">Sous-Total</th>
+			<td>{{ total }}
+				€
+				{% if panier|length %}
+				</td>
+			</td>
+		</tr>
+	</tfoot>
+</table>
+
+<div>
+	<h1>Votre Adresse</h1>
+	<table class="table">
+		<thead class="thead-light">
+			<tr>
+				<th colspan="9">Adresse de livraison</th>
+			</tr>
+			<tr>
+				<th>Choix</th>
+				<th>Nom</th>
+				<th>Prenom</th>
+				<th>Adresse</th>
+				<th>Ville</th>
+				<th>Code postal</th>
+				<th>Pays</th>
+				<th>Telephone</th>
+			</tr>
+		</thead>
+
+		<tbody>
+			<tr>
+				<div class="form-check">
+					<td>
+						<input class="form-check-input ml-3" type="radio" name="exampleRadios" id="exampleRadios1" checked>
+					</td>
+					<td>{{ app.user.nom }}</td>
+					<td>{{ app.user.prenom }}</td>
+					<td>{{ app.user.adresse }}</td>
+					<td>{{ app.user.ville }}</td>
+					<td>{{ app.user.codePostal }}</td>
+					<td>{{ app.user.pays }}</td>
+					<td>{{ app.user.telephone }}</td>
+				</tr>
+				{% if adresses  %}
+					{% for adresse in adresses %}
+						<tr>
+							<div class="form-check">
+								<td>
+									
+										<input class="form-check-input ml-3" type="radio" name="exampleRadios" id="exampleRadios1" checked>
+									
+								</td>
+								<td>{{ adresse.nom }}</td>
+								<td>{{ adresse.prenom }}</td>
+								<td>{{ adresse.adresse }}</td>
+								<td>{{ adresse.ville }}</td>
+								<td>{{ adresse.codePostal }}</td>
+								<td>{{ adresse.pays }}</td>
+								<td>{{ adresse.telephone }}</td>
+							</tr>
+						{% endfor %}
+					{% endif %}
+				</div>
+			</tr>
+		</tbody>
+		<tfoot class="thead-light">
+			<th colspan="9">
+				<button type="button" class="collapsible btn btn-primary float-right mb-2">Nouvelle adresse ?</button>
+				<div class="content">
+					<br>
+					{{ form_start(form) }}
+					<div class="form-row">
+						<div class="form-group col-md-2">
+							{{ form_row(form.civilite) }}
+						</div>
+						<div class="form-group col-md-5">
+							{{ form_row(form.nom , {'attr': {'placeholder': app.user.nom }}) }}
+						</div>
+						<div class="form-group col-md-5">
+							{{ form_row(form.prenom , {'attr': {'placeholder': app.user.prenom }}) }}
+						</div>
+					</div>
+
+					<div class="form-row">
+						<div class="form-group col-md-5 offset-1">
+							{{ form_row(form.pays , {'attr': {'placeholder': app.user.pays }}) }}
+						</div>
+						<div class="form-group col-md-5">
+							{{ form_row(form.code_postal , {'attr': {'placeholder': app.user.codePostal }}) }}
+						</div>
+					</div>
+
+					<div class="form-row">
+						<div class="form-group col-md-5 offset-1">
+							{{ form_row(form.ville , {'attr': {'placeholder': app.user.ville }}) }}
+						</div>
+						<div class="form-group col-md-5">
+							{{ form_row(form.adresse , {'attr': {'placeholder': app.user.adresse }}) }}
+						</div>
+					</div>
+
+
+					{{ form_row(form.telephone , {'attr': {'placeholder': app.user.telephone }}) }}
+					{{ form_row(form.agreeTerms) }}
+
+					<div class="text-right">
+						<button class="btn btn-primary">{{ button_label|default('Sauvegarder') }}</button>
+					</div>
+					{{ form_end(form) }}
+
+
+				</div>
+			</th>
+		</tfoot>
+	</table>AJOUTER     METHODE     DE      LIVRAISON   ICI</div>
+<a href="{{ path('app_stripe') }}" class="btn btn-success float-right">
+	<i class="fa fa-cash-register"></i>Valider la livraison et payer</a>{% endif %}<script>
+var coll = document.getElementsByClassName("collapsible");
+var i;
+
+for (i = 0; i < coll.length; i++) {
+coll[i].addEventListener("click", function () {
+this.classList.toggle("active");
+var content = this.nextElementSibling;
+if (content.style.display === "block") {
+content.style.display = "none";
+} else {
+content.style.display = "block";
+}
+});
+}</script>{% endblock %}

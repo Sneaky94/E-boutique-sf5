@@ -20,8 +20,10 @@ class NewClientType extends AbstractType
             ->add('prenom')
             ->add('civilite')
             ->add('adresse')
+            ->add('telephone')
             ->add('code_postal')
             ->add('ville')
+            ->add('pays')
         ;
     }
 

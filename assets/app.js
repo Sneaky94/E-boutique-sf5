@@ -6,7 +6,10 @@
  */
 
 // any CSS you import will output into a single css file (app.css in this case)
+
+
 import "./styles/app.scss";
+
 
 // start the Stimulus application
 // import "./bootstrap";
@@ -15,8 +18,8 @@ const $ = require("jquery");
 global.$ = global.jQuery = $;
 require("bootstrap");
 
-
 $(() => {
+  // requete ajax pour le nombre d'article qui s'ajoute en haut du panier
   $("a.ajax").on("click", (evtClick) => {
     evtClick.preventDefault();
     var href = evtClick.target.getAttribute("href");
@@ -34,6 +37,7 @@ $(() => {
     });
   });
 
+  // requete ajax pour le bouton de recherche de la nav 
   $("#formSearch").on("submit", (evtSubmit) => {
     evtSubmit.preventDefault();
     $.ajax({

@@ -1,0 +1,12 @@
+{{ form_start(form) }}
+{{ form_widget(form) }}
+
+<div class="d-flex justify-content-between">
+
+	<a href="{{ path('admin_app_adresse_livraison_index') }}" class="btn btn-secondary"><i class="fa fa-reply"></i> Retour à la liste</a>
+	
+    <button class="btn btn-primary">{{ button_label|default('Sauvegarder') }}</button>
+
+</div>
+
+{{ form_end(form) }}
